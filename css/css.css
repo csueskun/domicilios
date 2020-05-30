@@ -1,0 +1,120 @@
+body{
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  padding-top: 80px;
+}
+nav#main-nav{
+  border-bottom: thin solid darkgrey;
+  background-color: white;
+}
+div.mi-snackbar>p{
+  font-weight: 400 !important;
+}
+
+div.toast.delete{
+  position: absolute;
+  right: 1%;
+  z-index: 1000;
+  font-size: .85em;
+}
+div.toast.delete>div.toast-body>button{
+  padding: 0px 4px;
+  vertical-align: initial;
+}
+.pl0{
+  padding-left: 0;
+}
+table#shopping-cart-items tbody td{
+  vertical-align: middle;
+}
+div.producto-container-home{
+
+}
+div.producto-container-home>div{
+
+}
+div.producto-container-home>div>div{
+  padding: 0px 8px;
+}
+div.producto-container-home>div>div.card-body{
+
+}
+div.producto-container-home>div>div.card-body>h4,
+div.producto-container-home>div>div.card-body>h4>button,
+div.producto-container-home>div>div.card-body>h5,
+div.producto-container-home>div>div.card-body>p{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+div.producto-container-home>div>div.card-footer{
+  padding-bottom: 4px;
+}
+div.producto-container-home>div>a{
+
+}
+ 
+.sac{
+  transition: all ease 1s;
+}
+.sac.ng-enter {
+  opacity: 0;
+}
+.sac.ng-leave,
+.sac.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.sac.ng-leave.ng-leave-active,
+.sac.ng-leave.ng-hide {
+  opacity: 0;
+}
+
+ul#product-tree{
+
+}
+ul#product-tree>li{
+  padding-right: 0;
+}
+ul#product-tree>li>ul{
+  padding-top: 0 !important;
+}
+ul#product-tree>li>ul>li{
+  padding-right: 0;
+  padding-left: 15px;
+  border: none;
+  padding-bottom: 0;
+}
+ul#product-tree>li>ul>li>ul{
+  padding-top: 0 !important;
+}
+ul#product-tree>li>ul>li>ul>li{
+  padding-right: 0;
+  padding-left: 15px;
+  padding-top: 4px;
+  border: none;
+  padding-bottom: 0;
+}
+ul#product-tree button[data-toggle="collapse"]{
+  padding: 0 8px;
+  height: 16px;
+  margin-top: -4px;
+}
+ul#product-tree button.btn-link{
+  padding: 0;
+  color: #616161;
+}
+ul#product-tree button.btn-link.active{
+  color: #0056b3;
+  text-decoration: underline;
+}
+ul#product-tree button[data-toggle="collapse"] svg{
+  vertical-align: super;
+}
+@media (max-width: 992px){
+.navbar-brand>img {
+  height: 48px;
+}
+ul#product-tree{
+  margin-bottom: 12px;
+}
+}

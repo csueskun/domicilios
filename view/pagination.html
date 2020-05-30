@@ -1,0 +1,16 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled" ng-class="{'disabled': pagination.current_page === 1}">
+      <button class="page-link" tabindex="-1" ng-click="setPaginationPage(pagination.current_page-1)">Anterior</button>
+    </li>
+    <li 
+      class="page-item" ng-class="{'active': pagination.current_page === $index + 1}" 
+      ng-click="setPaginationPage($index+1)"
+      ng-repeat="n in [].constructor(pagination.last_page) track by $index">
+      <button class="page-link">{{$index+1}}</button>
+    </li>
+    <li class="page-item" ng-class="{'disabled': pagination.current_page === pagination.last_page}">
+      <button class="page-link" ng-click="setPaginationPage(pagination.current_page+1)">Siguiente</button>
+    </li>
+  </ul>
+</nav>
