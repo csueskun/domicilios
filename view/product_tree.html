@@ -1,4 +1,15 @@
 <ul class="list-group" id='product-tree'>
+  <li class="list-group-item pr-2">
+    <form ng-submit='searchProducts()'>
+      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+      <div class="input-group">
+        <input type="text" ng-model="pagination.search" class="form-control" placeholder="Buscar">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" style="padding: 0 4px;"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </li>
   <li class="list-group-item" ng-repeat="clase in productTree">
     <button class="btn btn-link" ng-class="{'active': clase.id == pagination.clase}" ng-click="treeFilter(clase.id)">{{clase.nombre | uppercase}}</button>
     <button class="btn btn-sm btn-default" onclick="$(this).find('span').toggle()" type="button" data-toggle="collapse" data-target="#ulclase{{clase.id}}">

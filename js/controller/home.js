@@ -16,7 +16,7 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
 
       }};
     let error = error=>{
-      console.log(error);
+      console.error(error);
       $scope.loadingProductTree = false;
     };
     apiInterface.get('product-tree', {}, success, error);
@@ -33,7 +33,7 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
         $scope.showProductList();
       }};
     let error = error=>{
-      console.log(error);
+      console.error(error);
       $scope.loadingProductos = false;
     };
     apiInterface.get('paginated/producto', {params: $scope.pagination}, success, error);
@@ -127,7 +127,7 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
   }
   
   $scope.treeFilter = function(clase, grupo=0, empresa=0){
-    $scope.pagination = {per_page: 6};
+    $scope.pagination = {per_page: 6, search: $scope.pagination.search};
     $scope.pagination.clase = clase;
     if(grupo>0){
       $scope.pagination.grupo = grupo;
@@ -135,6 +135,10 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
     if(empresa>0){
       $scope.pagination.empresa = empresa;
     }
+    loadProductos();
+  }
+  
+  $scope.searchProducts = function(){
     loadProductos();
   }
 });

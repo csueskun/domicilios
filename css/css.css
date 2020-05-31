@@ -74,6 +74,7 @@ ul#product-tree{
 }
 ul#product-tree>li{
   padding-right: 0;
+  padding-left: 8px;
 }
 ul#product-tree>li>ul{
   padding-top: 0 !important;
@@ -117,4 +118,9 @@ ul#product-tree button[data-toggle="collapse"] svg{
 ul#product-tree{
   margin-bottom: 12px;
 }
+}
+@media (max-width: 800px){
+  .cart-product-image{
+    display: none;
+  }
 }

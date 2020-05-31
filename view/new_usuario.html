@@ -1,0 +1,52 @@
+<div class="container">
+  <h4>Registro de nuevo usuario</h4>
+  <form name="form" novalidate class="needs-validation">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombres">Usuario</label>
+        <input type="text" ng-model="user.usuario" class="form-control {{form.$dirty?(form.$dirty?'is-valid':'is-invalid'):''}}" name="usuario" required>
+        <div class="invalid-feedback" ng-if="form.usuario.$error.required"><i class="fa fa-times"></i> El nombre de usuario es obligatorio</div> 
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="password">Contraseña</label>
+        <input type="password" ng-model="user.password" class="form-control {{form.$dirty?(form.password.$valid?'is-valid':'is-invalid'):''}}" name="password" required>
+        <div class="invalid-feedback" ng-if="form.password.$error.required"><i class="fa fa-times"></i> El password es obligatorio</div> 
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="password2">Confirmar contraseña</label>
+        <input type="password" ng-model="user.password2" class="form-control {{form.$dirty?((form.password2.$valid && user.password2 == user.password)?'is-valid':'is-invalid'):''}}" name="password2" required>
+        <div class="invalid-feedback" ng-if="form.password2.$error.required"><i class="fa fa-times"></i> Debe confirmar la contraseña</div> 
+        <div class="invalid-feedback" ng-if="form.password2.$valid && user.password2 != user.password"><i class="fa fa-times"></i> Las contraseñas no coinciden</div> 
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombres">Nombres</label>
+        <input type="text" ng-model="user.nombres" class="form-control {{form.$dirty?(form.nombres.$valid?'is-valid':'is-invalid'):''}}" name="nombres" required>
+        <div class="invalid-feedback" ng-if="form.nombres.$error.required"><i class="fa fa-times"></i> Los nombres son obligatorios</div> 
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" ng-model="user.apellidos" class="form-control {{form.$dirty?(form.apellidos.$valid?'is-valid':'is-invalid'):''}}" name="apellidos" required>
+        <div class="invalid-feedback" ng-if="form.apellidos.$error.required"><i class="fa fa-times"></i> Los apellidos son obligatorios</div> 
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form row">
+        <div class="col-md-12 text-center">
+          <button ng-click="save()" type="submit" class="btn btn-primary" ng-disabled="form.$invalid || saving || user.password2 != user.password">
+            <i class="fa fa-save {{saving?'fa-spin':''}}"></i>
+            Guardar
+          </button>
+        </div>
+      </div>
+      <br><br>
+    </div>
+  </form>
+</div>

@@ -1,34 +1,34 @@
 const apiUrl = 'http://sgv.h-software.co/';
 const imgUrl = 'http://sgv.h-software.co/img/';
-const api_token = 'b2Q1enFKNWxFM3NtUWViWTl4T1hMOTVFMDBNRXU1ZlJtcWFCTE9hbA==';
 
 class ApiInterface {
   constructor($http) {
     this.$http = $http;
+    this.api_token = sessionStorage.getItem('api_token', '');
   }
-  get(url, config={}, thenCallback=()=>{}, errorCallback=()=>{}, finallyCallback=()=>{}) {
+  get(url, config={}, successCallback=()=>{}, errorCallback=()=>{}) {
     if(config.hasOwnProperty('params')){
-      config.params.api_token = api_token;
+      config.params.api_token = this.api_token;
     }
     else{
-      config.params = { api_token: api_token };
+      config.params = { api_token: this.api_token };
     }
-    this.$http.get(apiUrl+url, config).then(thenCallback, errorCallback);
+    this.$http.get(apiUrl+url, config).then(successCallback, errorCallback);
   }
-  post(url, data={}, config={}, thenCallback=()=>{}, errorCallback=()=>{}, finallyCallback=()=>{}) {
-    config.params = { api_token: api_token };
+  post(url, data={}, config={}, successCallback=()=>{}, errorCallback=()=>{}) {
+    config.params = { api_token: this.api_token };
     url = apiUrl+url+paramObjectToString(config.params);
-    this.$http.post(url, data, config).then(thenCallback, errorCallback);
+    this.$http.post(url, data, config).then(successCallback, errorCallback);
   }
-  put(url, data={}, config={}, thenCallback=()=>{}, errorCallback=()=>{}, finallyCallback=()=>{}) {
-    config.params = { api_token: api_token };
+  put(url, data={}, config={}, successCallback=()=>{}, errorCallback=()=>{}) {
+    config.params = { api_token: this.api_token };
     url = apiUrl+url+paramObjectToString(config.params);
-    this.$http.put(url, data, config).then(thenCallback, errorCallback);
+    this.$http.put(url, data, config).then(successCallback, errorCallback);
   }
-  delete(url, config={}, thenCallback=()=>{}, errorCallback=()=>{}, finallyCallback=()=>{}) {
-    config.params = { api_token: api_token };
+  delete(url, config={}, successCallback=()=>{}, errorCallback=()=>{}) {
+    config.params = { api_token: this.api_token };
     url = apiUrl+url+paramObjectToString(config.params);
-    this.$http.delete(url, config).then(thenCallback, errorCallback);
+    this.$http.delete(url, config).then(successCallback, errorCallback);
   }
   getImgUrl(imagen, carpeta){
     return imgUrl+carpeta+'/'+imagen;
@@ -112,5 +112,32 @@ class ShoppingCart {
   }
   updateView(){
     updateShoppingCart(this.getAll());
+  }
+}
+class User {
+  constructor($rootScope) {
+    this.$rootScope = $rootScope;
+  }
+  login(user) {
+    sessionStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('api_token', user.api_token);
+  }
+  logout(){
+    sessionStorage.setItem('user', '{}');
+    sessionStorage.setItem('api_token', '');
+  }
+  getUser(){
+    let user = sessionStorage.getItem('user');
+    if(!user || user == '{}'){
+      return {};
+    }
+    return JSON.parse(user);
+  }
+  auth(){
+    let user = sessionStorage.getItem('user');
+    if(!user || user == '{}'){
+      return false;
+    }
+    return true;
   }
 }

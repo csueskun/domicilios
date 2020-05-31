@@ -54,9 +54,9 @@
       <!-- <a href="#"><img class="card-img-top" src="{{producto.imagen}}" alt=""></a> -->
       <div class="card-body">
         <h4 class="card-title">
-          <button type="button" class="btn btn-link pl0" ng-click='showRelatedProducto(rProducto)'>
+          <a href="" class="pl0" ng-click='showRelatedProducto(rProducto)' style="font-size: 0.7em;">
             {{rProducto.descripcion}}
-          </button>
+          </a>
         </h4>
         <h5 class="pb-2">{{rProducto.precio1 | currency:'$':0}}</h5>
       </div>

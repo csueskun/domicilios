@@ -8,24 +8,12 @@ function routes($routeProvider) {
     templateUrl : "/view/shopping_cart.html",
     controller: 'shoppingCartController'
   })
-  .when("/empresa", {
-    templateUrl : "/view/empresa/index.html",
-    controller: 'empresaController'
+  .when("/new_usuario", {
+    templateUrl : "/view/new_usuario.html",
+    controller: 'loginController'
   })
-  .when("/clase", {
-    templateUrl : "/view/clase/index.html",
-    controller: 'claseController'
-  })
-  .when("/tipocategoria", {
-    templateUrl : "/view/tipocategoria/index.html",
-    controller: 'tipocategoriaController'
-  })
-  .when("/tipoproducto", {
-    templateUrl : "/view/tipoproducto/index.html",
-    controller: 'tipoproductoController'
-  })
-  .when("/grupo", {
-    templateUrl : "/view/grupo/index.html",
-    controller: 'grupoController'
+  .when("/login", {
+    templateUrl : "/view/login.html",
+    controller: 'loginController'
   });
 }
