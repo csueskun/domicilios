@@ -11,14 +11,18 @@
     </form>
   </li>
   <li class="list-group-item" ng-repeat="clase in productTree">
-    <button class="btn btn-link" ng-class="{'active': clase.id == pagination.clase}" ng-click="treeFilter(clase.id)">{{clase.nombre | uppercase}}</button>
+    <button class="btn btn-link" ng-class="{'active': clase.id == pagination.clase}" ng-click="treeFilter(clase.id)">
+      <i class="{{clase.icono}}" style="vertical-align: initial;"></i> {{clase.nombre | uppercase}}
+    </button>
     <button class="btn btn-sm btn-default" onclick="$(this).find('span').toggle()" type="button" data-toggle="collapse" data-target="#ulclase{{clase.id}}">
       <span style="display: none;"><i class="fa fa-caret-down"></i></span>
       <span><i class="fa fa-caret-up"></i></span>
     </button> 
     <ul class="list-group collapse show" style="padding-top: 10px;" id="ulclase{{clase.id}}">
       <li class="list-group-item" ng-repeat="grupo in clase.grupos">
-        <button class="btn btn-link" ng-class="{'active': grupo.id == pagination.grupo}" ng-click="treeFilter(clase.id, grupo.id)">{{grupo.nombre | uppercase}}</button>
+        <button class="btn btn-link" ng-class="{'active': grupo.id == pagination.grupo}" ng-click="treeFilter(clase.id, grupo.id)">
+          <i class="{{grupo.icono}}" style="vertical-align: initial;"></i> {{grupo.nombre | uppercase}}
+        </button>
         <button class="btn btn-sm btn-default" onclick="$(this).find('span').toggle()" type="button" data-toggle="collapse" data-target="#ulgrupo{{grupo.id}}">
           <span style="display: none;"><i class="fa fa-caret-down"></i></span>
           <span><i class="fa fa-caret-up"></i></span>
