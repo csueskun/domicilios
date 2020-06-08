@@ -49,89 +49,57 @@
       <div class="row" ng-show='loadingProductos'>
         <i class="fa fa-cog fa-spin col-lg-12 h1"></i>
       </div>
-      <div class="row sac" ng-hide="loadingProductos">
-        <div class="col-lg-4 col-md-6 mb-4 producto-container-home" ng-repeat='producto in productoList'>
+      <div class="row sac" id="productos-container" ng-hide="loadingProductos">
+        <div class="col-md-12 producto-container-home" ng-repeat='producto in productoList'>
           <div class="card h-100">
-            <button type="button" class="btn btn-link" ng-click='showProducto(producto)' style="padding: 0;">
-              <div class="imagen-producto" style="border-radius: .25rem; height: 150px; background: url({{producto.imagen}}) center; background-size: cover;"></div>
-            </button>
-            <!-- <a href="#"><img class="card-img-top" src="{{producto.imagen}}" alt=""></a> -->
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="" class="pl0" ng-click='showProducto(producto)' style="font-size: 0.8em;">
-                  {{producto.descripcion}}
-                </a>
-              </h4>
-              <h5>{{producto.precio1 | currency:'$':0}}</h5>
-              <p class="card-text">{{producto.detalle}}</p>
-              <p class="card-text">{{producto.empresa.nombre}}</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
+            <table>
+              <tr>
+                <td width='150' class="product-image-list-view">
+                  <div class="imagen-producto" style="height: 74px; border-radius: .25rem; background: url({{producto.imagen}}) center no-repeat; background-size: cover;"></div>
+                </td>
+                <td>
+                  <h4 class="card-title mb-0">
+                    <a href="" class="pl0" ng-click='showProducto(producto)' style="font-size: 0.7em;">
+                      {{producto.descripcion}}
+                    </a>
+                  </h4>
+                  <h5 class="mb-0">{{producto.precio1 | currency:'$':0}} <span class="font-weight-light" style="font-size: 0.8em;">{{producto.unidad}}</span></h5>
+                  <!-- <p class="card-text mb-0" ng-if='producto.detalle'>{{producto.detalle}}</p> -->
+                  <p class="card-text mb-0">{{producto.empresa.nombre}}</p>
+                </td>
+
+                <td width='180'>
+                  <table><td>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary btn-sm" ng-disabled='producto.cantidad < 2' ng-click='producto.cantidad = (producto.cantidad) - 1' style=""><i class="fa fa-minus-square"></i></button>
+                      </div>
+                      <input type="number" ng-model="producto.cantidad" class="form-control text-right" style="padding: 0px 2px;">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary btn-sm"  ng-disabled='producto.cantidad > 98' ng-click='producto.cantidad = (producto.cantidad) + 1' style=""><i class="fa fa-plus-square"></i></button>
+                      </div>
+                    </div>
+                  </td><td>
+                    <h6 class="mb-0">{{producto.precio1 * producto.cantidad | currency:'$':0}}</h6>
+                  </td></table>
+                  <button class="btn btn-sm btn-success btn-block btn-sm" ng-click='addItemPedidoList(producto)' ng-disabled='addProductoList'><i class="fa fa-shopping-bag"></i> Agregar</button>
+                  <!-- <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small> -->
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
-
       </div>
       <div class="row" ng-if='!loadingProductos && pagination.showing > 3'>
         <div class="col-md-12" ng-include='"/view/pagination.html"'></div>
       </div>
       <!-- /.row -->
-
     </div>
     <!-- /.col-lg-9 -->
     <div class="col-lg-9 collapse main-content" id="producto-detail" ng-include='"/view/product_details.html"'></div>
 
   </div>
   <!-- /.row -->
-  <!-- Modal -->
-  <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addItemModalLabel">{{producto.descripcion}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form name="form" novalidate class="needs-validation" ng-submit='addItemPedido()'>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="cantidad">Cantidad</label>
-                <input type="number" min="1" max="99" ng-model="itemPedido.cantidad" value="1" class="form-control {{form.cantidad.$valid?'is-valid':'is-invalid'}}" name="cantidad" required>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="precio">Precio</label>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">$</div>
-                  </div>
-                  <input type="text" class="form-control text-right" readonly name="precio" required value="{{producto.precio1 * itemPedido.cantidad | currency:'$':0}}">
-                </div>
-                
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="observaciones">Observaciones</label>
-                <textarea type="text" rows='10' ng-model="itemPedido.observaciones" class="form-control {{form.observaciones.$valid?'is-valid':'is-invalid'}}" name="observaciones"></textarea>
-              </div>
-            </div>
-            <hr>
-            <div class="form row">
-              <div class="col-md-12" style="text-align: right;">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid || saving">
-                  <i class="fa fa-save {{saving?'fa-spin':''}}"></i> Agregar item al pedido
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>
 <!-- /.container -->

@@ -1,7 +1,7 @@
 body{
   font-family: 'Oswald', sans-serif;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
   padding-top: 80px;
 }
 nav#main-nav{
@@ -123,4 +123,12 @@ ul#product-tree{
   .cart-product-image{
     display: none;
   }
+}
+@media (max-width: 576px){
+  .product-image-list-view{
+    width: 120px;
+  }
+}
+#productos-container>.producto-container-home{
+  padding: 4px;
 }

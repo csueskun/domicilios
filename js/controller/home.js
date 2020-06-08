@@ -1,7 +1,12 @@
 app.controller('homeController', function($scope, apiInterface, snackbar, shoppingCart, $timeout) {
   $scope.productoList = [];
   $scope.productTree = [];
-  $scope.pagination = {per_page: 6};
+  $scope.pagination = {per_page: 12};
+  let units = {
+    'UND': 'Unidad',
+    'klg': 'Kilo',
+    'kl': 'Kilo'
+  }
 
   loadProductTree();
   loadProductos();
@@ -29,7 +34,8 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
         $scope.productoList = data.data.data.data;
         $scope.pagination = data.data.data.pagination;
         $scope.loadingProductos = false;
-        setImgPath();
+        // setImgPath();
+        setExtraData();
         $scope.showProductList();
       }};
     let error = error=>{
@@ -39,10 +45,17 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
     apiInterface.get('paginated/producto', {params: $scope.pagination}, success, error);
   }
 
-  function setImgPath(){
+  function setExtraData(){
     if(Array.isArray($scope.productoList)){
       $scope.productoList.forEach(p=>{
         p.imagen = productoImg(p.imagen);
+        p.cantidad = 1;
+        if(units.hasOwnProperty(p.unidad)){
+          p.unidad = units[p.unidad];
+        }
+        else{
+          p.unidad = '';
+        }
       });
     }
   }
@@ -115,6 +128,16 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
     }
     $('#addItemModal').modal('toggle');
   }
+
+  $scope.addItemPedidoList = function(producto){
+    $scope.addProductoList = true;
+    $scope.producto = producto;
+    $scope.producto.observaciones = '';
+    shoppingCart.addItem($scope.producto);
+    snackbar.green('Se agregó el producto al carrito');
+    $scope.producto.cantidad = 1;
+    $scope.addProductoList = false;
+  }
   
   $scope.show = function(section){
     $('.collapse.main-content.show').collapse('toggle');
@@ -127,7 +150,7 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
   }
   
   $scope.treeFilter = function(clase, grupo=0, empresa=0){
-    $scope.pagination = {per_page: 6, search: $scope.pagination.search};
+    $scope.pagination = {per_page: 12, search: $scope.pagination.search};
     $scope.pagination.clase = clase;
     if(grupo>0){
       $scope.pagination.grupo = grupo;
