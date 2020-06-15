@@ -47,7 +47,7 @@
         <div class="col-md-12" ng-include='"/view/pagination.html"'></div>
       </div>
       <div class="row" ng-show='loadingProductos'>
-        <i class="fa fa-cog fa-spin col-lg-12 h1"></i>
+        <i class="fa fa-cog fa-spin col-lg-12 h2 text-primary"></i>
       </div>
       <div class="row sac" id="productos-container" ng-hide="loadingProductos">
         <div class="col-md-12 producto-container-home" ng-repeat='producto in productoList'>
@@ -68,21 +68,28 @@
                   <p class="card-text mb-0">{{producto.empresa.nombre}}</p>
                 </td>
 
-                <td width='180'>
-                  <table><td>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary btn-sm" ng-disabled='producto.cantidad < 2' ng-click='producto.cantidad = (producto.cantidad) - 1' style=""><i class="fa fa-minus-square"></i></button>
+                <td width='200'>
+                  <table>
+                    <td>Cantidad:</td>
+                    <td>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-secondary btn-sm" ng-disabled='producto.cantidad < 2' ng-click='producto.cantidad = (producto.cantidad) - 1' style=""><i class="fa fa-minus-square text-danger"></i></button>
+                        </div>
+                        <input type="number" ng-model="producto.cantidad" class="form-control text-right" style="padding: 0px 2px;">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary btn-sm"  ng-disabled='producto.cantidad > 98' ng-click='producto.cantidad = (producto.cantidad) + 1' style=""><i class="fa fa-plus-square text-success"></i></button>
+                        </div>
                       </div>
-                      <input type="number" ng-model="producto.cantidad" class="form-control text-right" style="padding: 0px 2px;">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary btn-sm"  ng-disabled='producto.cantidad > 98' ng-click='producto.cantidad = (producto.cantidad) + 1' style=""><i class="fa fa-plus-square"></i></button>
-                      </div>
-                    </div>
-                  </td><td>
-                    <h6 class="mb-0">{{producto.precio1 * producto.cantidad | currency:'$':0}}</h6>
-                  </td></table>
-                  <button class="btn btn-sm btn-success btn-block btn-sm" ng-click='addItemPedidoList(producto)' ng-disabled='addProductoList'><i class="fa fa-shopping-bag"></i> Agregar</button>
+                    </td>
+                    <!-- <td>
+                      <h6 class="mb-0">{{producto.precio1 * producto.cantidad | currency:'$':0}}</h6>
+                    </td> -->
+                  </table>
+                  <button class="btn btn-sm btn-success btn-block btn-sm" ng-click='addItemPedidoList(producto)' ng-disabled='addProductoList' style="font-size: 16px;">
+                    <i class="fa fa-shopping-bag"></i> 
+                    Agregar {{producto.precio1 * producto.cantidad | currency:'$':0}}
+                  </button>
                   <!-- <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small> -->
                 </td>
               </tr>
