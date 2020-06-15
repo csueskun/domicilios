@@ -70,15 +70,15 @@
 
                 <td width='200'>
                   <table>
-                    <td>Cantidad:</td>
+                    <td>Cantidad:&nbsp;&nbsp;&nbsp;</td>
                     <td>
                       <div class="input-group">
                         <div class="input-group-prepend">
-                          <button class="btn btn-outline-secondary btn-sm" ng-disabled='producto.cantidad < 2' ng-click='producto.cantidad = (producto.cantidad) - 1' style=""><i class="fa fa-minus-square text-danger"></i></button>
+                          <button class="btn btn-danger btn-sm" ng-disabled='producto.cantidad < 2' ng-click='producto.cantidad = (producto.cantidad) - 1'><i class="fa fa-minus"></i></button>
                         </div>
                         <input type="number" ng-model="producto.cantidad" class="form-control text-right" style="padding: 0px 2px;">
                         <div class="input-group-append">
-                          <button class="btn btn-outline-secondary btn-sm"  ng-disabled='producto.cantidad > 98' ng-click='producto.cantidad = (producto.cantidad) + 1' style=""><i class="fa fa-plus-square text-success"></i></button>
+                          <button class="btn btn-success btn-sm"  ng-disabled='producto.cantidad > 98' ng-click='producto.cantidad = (producto.cantidad) + 1'><i class="fa fa-plus"></i></button>
                         </div>
                       </div>
                     </td>
