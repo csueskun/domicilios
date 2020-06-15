@@ -29,7 +29,7 @@
         </button> 
         <ul class="list-group collapse show" style="padding-top: 10px;" id='ulgrupo{{grupo.id}}'>
           <li class="list-group-item" ng-repeat="empresa in grupo.empresas">
-            <button class="btn btn-link" ng-class="{'active': empresa.id == pagination.empresa}" style="text-align: left;" ng-click="treeFilter(clase.id, grupo.id, empresa.id)">{{empresa.nombre}}</button>
+            <button class="btn btn-link" ng-class="{'active': empresa.id == pagination.empresa}" style="text-align: left" ng-click="treeFilter(clase.id, grupo.id, empresa.id)">{{empresa.nombre}}</button>
           </li>
         </ul>
       </li>
