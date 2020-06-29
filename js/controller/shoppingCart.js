@@ -27,6 +27,7 @@ app.controller('shoppingCartController', function($scope, apiInterface, snackbar
   $scope.removeitem = function(id){
     shoppingCart.removeItem(id);
     loadCartItems();
+    calculateTotal();
     shoppingCart.updateView();
   }
 });

@@ -1,3 +1,9 @@
+<div class="card mb-2" ng-if="!empresaTree && empresaSelected.id">
+  <div style="height: 74px; border-radius: .25rem; background: url({{empresaSelected.imagen}}) center no-repeat; background-size: cover;"></div>
+  <div class="card-body text-center" style="padding: 0">
+    <p class="card-text"><strong>{{empresaSelected.nombre}}</strong></p>
+  </div>
+</div>
 <ul class="list-group" id='product-tree'>
   <li class="list-group-item pr-2">
     <form ng-submit='searchProducts()'>
@@ -23,11 +29,11 @@
         <button class="btn btn-link" ng-class="{'active': grupo.id == pagination.grupo}" ng-click="treeFilter(clase.id, grupo.id)">
           <i class="{{grupo.icono}}" style="vertical-align: initial;"></i> {{grupo.nombre}}
         </button>
-        <button class="btn btn-sm btn-default" onclick="$(this).find('span').toggle()" type="button" data-toggle="collapse" data-target="#ulgrupo{{grupo.id}}">
+        <button class="btn btn-sm btn-default" onclick="$(this).find('span').toggle()" type="button" data-toggle="collapse" data-target="#ulgrupo{{grupo.id}}" ng-hide='empresaTree || empresaSelected.id'>
           <span style="display: none;"><i class="fa fa-caret-down"></i></span>
           <span><i class="fa fa-caret-up"></i></span>
         </button> 
-        <ul class="list-group collapse show" style="padding-top: 10px;" id='ulgrupo{{grupo.id}}'>
+        <ul class="list-group collapse show" style="padding-top: 10px;" id='ulgrupo{{grupo.id}}' ng-hide='empresaTree || empresaSelected.id'>
           <li class="list-group-item" ng-repeat="empresa in grupo.empresas">
             <button class="btn btn-link" ng-class="{'active': empresa.id == pagination.empresa}" style="text-align: left" ng-click="treeFilter(clase.id, grupo.id, empresa.id)">{{empresa.nombre}}</button>
           </li>

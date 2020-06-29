@@ -35,7 +35,7 @@
           <tr ng-hide='auth'>
             <td colspan="6"><div class="alert alert-warning text-center mb-0" role="alert">Debe <a href="/#!/login" class="alert-link">iniciar sesión</a> para finalizar la compra</div></td>
           </tr>
-          <tr>
+          <tr ng-if="shoppingCartItems.length">
             <th></th><th></th><th></th><th colspan="3"><button ng-disabled="!auth" class="btn btn-success btn-block btn-lg"><i class="fa fa-dollar-sign"></i> Finalizar compra</but<th></th>
           </tr>
         </tbody>

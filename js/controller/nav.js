@@ -20,4 +20,9 @@ app.controller('navController', function($scope, apiInterface, snackbar, userInt
       window.location.href = '/#!/login';
     }, 1000);
   }
+
+  $scope.goHome = function(){
+    sessionStorage.setItem('empresa', "{}");
+    window.location.href = '/';
+  }
 });

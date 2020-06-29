@@ -1,7 +1,13 @@
 app.controller('homeController', function($scope, apiInterface, snackbar, shoppingCart, $timeout) {
   $scope.productoList = [];
   $scope.productTree = [];
+  $scope.empresaSelected = loadEmpresaSelected();
   $scope.pagination = {per_page: 12};
+
+  if($scope.empresaSelected){
+    $scope.pagination.empresa = $scope.empresaSelected.id;
+  }
+
   let units = {
     'UND': 'Unidad',
     'klg': 'Kilo',
@@ -97,7 +103,7 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
   }
 
   function productoImg(img){
-    return apiInterface.getImgUrl(img, 'producto');
+    return apiInterface.getImgUrl(img, 'productos');
   }
 
   $scope.showProductList = function(){
@@ -163,5 +169,13 @@ app.controller('homeController', function($scope, apiInterface, snackbar, shoppi
   
   $scope.searchProducts = function(){
     loadProductos();
+  }
+
+  function loadEmpresaSelected(){
+    let empresaSelected = sessionStorage.getItem('empresa');
+    if(!empresaSelected || empresaSelected == '{}'){
+      return {};
+    }
+    return JSON.parse(empresaSelected);
   }
 });

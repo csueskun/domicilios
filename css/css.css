@@ -132,3 +132,10 @@ ul#product-tree{
 #productos-container>.producto-container-home{
   padding: 4px;
 }
+#empresas-container>div>.card{
+  padding: 8px 4px;
+  cursor: pointer;
+}
+#empresas-container>div>.card:hover{
+  border-color: #2da745;
+}

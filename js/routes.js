@@ -12,6 +12,10 @@ function routes($routeProvider) {
     templateUrl : "/view/new_usuario.html",
     controller: 'loginController'
   })
+  .when("/empresas", {
+    templateUrl : "/view/empresa/index.html",
+    controller: 'empresaController'
+  })
   .when("/login", {
     templateUrl : "/view/login.html",
     controller: 'loginController'
